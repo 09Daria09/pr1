@@ -1,0 +1,3 @@
+<button (click)="showMessage = true" [class.active]="showMessage">+</button>
+<button (click)="showMessage = false" [class.active]="!showMessage">-</button>
+<div *ngIf="showMessage">Привет!</div>
