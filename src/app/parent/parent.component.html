@@ -1,0 +1,10 @@
+<h1>Продукция магазина</h1>
+<p>Описание условий акции</p>
+<h2>Количество: {{clicks}}</h2>
+<h2>Общая стоимость: {{getTotalPrice()}}$</h2>
+
+<div class="product-card-container">
+    <div *ngFor="let product of products; let ind = index">
+        <app-child [product]="product" (onChanged)="onChanged($event, ind)"></app-child>
+    </div>
+</div>
