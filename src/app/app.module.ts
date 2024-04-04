@@ -11,6 +11,10 @@ import { HeaderComponent } from './site/header/header.component';
 import { FooterComponent } from './site/footer/footer.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormComponent } from './form/form.component';
+import { PasswordMatchDirective } from './password-match.directive';
+import { RformComponent } from './rform/rform.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +26,16 @@ import { ChildComponent } from './child/child.component';
     HeaderComponent,
     FooterComponent,
     ParentComponent,
-    ChildComponent
+    ChildComponent,
+    FormComponent,
+    PasswordMatchDirective,
+    RformComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()

@@ -1,0 +1,97 @@
+<div class="container">
+  <form (ngSubmit)="submitForm(form)" #form="ngForm">
+
+    <div class="form-group" [ngClass]="{'has-error': email.invalid && email.touched}">
+      <label for="email">Email</label>
+      <input 
+        type="email"
+        id="email"
+        class="form-control"
+        ngModel
+        name="email"
+        #email="ngModel"
+        required
+        email>
+      <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+        <div *ngIf="email.errors?.['required']">Email обязателен для заполнения.</div>
+        <div *ngIf="email.errors?.['email']">Введите корректный email.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pass">Password</label>
+      <input 
+        type="password"
+        id="pass"
+        class="form-control"
+        ngModel
+        name="pass"
+        #pass="ngModel"
+        required
+        minlength="6"
+        pattern="^[a-zA-Z0-9]+$">
+      <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
+        <div *ngIf="pass.errors?.['required']">Пароль обязателен для заполнения.</div>
+        <div *ngIf="pass.errors?.['minlength']">Пароль должен быть не менее 6 символов.</div>
+        <div *ngIf="pass.errors?.['pattern']">Пароль может содержать только буквы и цифры.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPass">Confirm Password</label>
+      <input 
+        type="password"
+        id="confirmPass"
+        class="form-control"
+        ngModel
+        name="confirmPass"
+        #confirmPass="ngModel"
+        required>
+      <div *ngIf="confirmPass.invalid && confirmPass.touched || !passwordsMatch(form) && confirmPass.touched" class="alert alert-danger">
+        <div *ngIf="confirmPass.errors?.['required']">Подтверждение пароля обязательно.</div>
+        <div *ngIf="!passwordsMatch(form) && confirmPass.touched">Пароли не совпадают.</div>
+      </div>
+    </div>
+    
+
+    <div class="form-group">
+      <label for="language">Language</label>
+      <select 
+        id="language"
+        class="form-control"
+        ngModel
+        name="language"
+        #language="ngModel"
+        required>
+        <option value="">Выберите язык...</option>
+        <option value="en">Английский</option>
+        <option value="ua">Украинский</option>
+        <option value="fr">Французский</option>
+      </select>
+      <div *ngIf="language.invalid && language.touched" class="alert alert-danger">
+        <div *ngIf="language.errors?.['required']">Необходимо выбрать язык.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p>Подписаться на рассылку новостей?</p>
+      <div class="radio-group">
+        <label class="radio-inline">
+          <input type="radio" [value]="true" ngModel name="newsletter" required> Да
+        </label>
+        <label class="radio-inline">
+          <input type="radio" [value]="false" ngModel name="newsletter" required> Нет
+        </label>
+      </div>
+    </div>
+    
+
+    <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Сохранить</button>
+  </form>
+
+  <hr>
+
+  <div *ngIf="isSubmited">
+    <pre>{{ form.value | json }}</pre>
+  </div>
+</div>
